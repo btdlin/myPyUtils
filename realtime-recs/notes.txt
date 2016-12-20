@@ -1,0 +1,8 @@
+
+using realtime-recs repo:
+mkvirtualenv -p /usr/bin/python3 my_test_env
+pip install --upgrade pip wheel
+cd service; pip install -r requirements_dev.txt
+
+cd /Users/dlin/work/Projects/myPyUtils/realtime-recs
+pip install -r requirements_test.txt
