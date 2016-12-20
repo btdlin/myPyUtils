@@ -4,7 +4,8 @@ import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
 # HOST = 'localhost'
-HOST = 'rts.aws.boomtrain.com'
+HOST = 'realtime-recs-b.magic.boomtrain.com'
+#HOST = 'rts.aws.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
 BSIN = 'ec5e00d4-6386-4cf7-a1d1-ea0e4f7d8a8c'
@@ -24,7 +25,6 @@ testdata = [
     ('Rappler', '1a1e951c0be6ac5f7a57c617f1160972'),
     ('Kellogg Insight', '2a9897b9f56088c2916bb3403cfff631')
 ]
-
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
 def test_no_filter(customer_name, site_id):
@@ -52,7 +52,6 @@ def test_global_filter(customer_name, site_id):
                               recset_id=RECSET_ID,
                               test=TEST)
 
-
     filter = recs_filter.TFilter(and_=None, existence=None, range=None, recency=None,
                                  or_=None, named='GLOBAL', overlap=None)
     request.groups[GROUP_NAME] = req.RecGroupRequest(count=COUNT, metafilter=filter)
@@ -71,7 +70,6 @@ def test_metafilter(customer_name, site_id):
                               recset_id=RECSET_ID,
                               test=TEST)
 
-
     metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
         recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
         recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['NONE'], field='allowed_territories', amount=recs_filter.TRange(min_=1.0, max_=None),
@@ -86,3 +84,43 @@ def test_metafilter(customer_name, site_id):
     with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
         response = client.get_recommendations(request)
     assert len(response) == COUNT
+
+@pytest.mark.parametrize("customer_name, site_id", testdata)
+def test_group_metafilter(customer_name, site_id):
+
+    request = req.RecsRequest(site_id=site_id,
+                              bsin=BSIN,
+                              seeds=EMPTY_SEEDS,
+                              excludes=EMPTY_EXCLUDES,
+                              recset_id=RECSET_ID,
+                              test=TEST)
+
+    metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
+        recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
+        recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['0'], field='closed', amount=recs_filter.TRange(min_=1.0, max_=None),
+                                       match_type=0), recency=None, and_=None, existence=None, or_=None, named=None,
+                range=None)], existence=None, or_=None, named=None, range=None)
+    request.groups['pw_nofilter'] = req.RecGroupRequest(count=9, metafilter=metafilter)
+
+    filter = recs_filter.TFilter(and_=None, existence=None, range=None, recency=None, or_=None, named='GLOBAL', overlap=None)
+    request.groups['pw_watch_ind'] = req.RecGroupRequest(count=1, metafilter=filter)
+
+    filter = recs_filter.TFilter(and_=None, existence=None, range=None, recency=None, or_=None, named='GLOBAL', overlap=None)
+    request.groups['pw_watch_fam'] = req.RecGroupRequest(count=1, metafilter=filter)
+
+    filter = recs_filter.TFilter(and_=None, existence=None, range=None, recency=None, or_=None, named='GLOBAL', overlap=None)
+    request.groups['pw_bid_ind'] = req.RecGroupRequest(count=2, metafilter=filter)
+
+    filter = recs_filter.TFilter(and_=None, existence=None, range=None, recency=None, or_=None, named='GLOBAL', overlap=None)
+    request.groups['pw_bid_cat'] = req.RecGroupRequest(count=2, metafilter=filter)
+
+    filter = recs_filter.TFilter(and_=None, existence=None, range=None, recency=None, or_=None, named='GLOBAL', overlap=None)
+    request.groups['pw_watch_cat'] = req.RecGroupRequest(count=1, metafilter=filter)
+
+    filter = recs_filter.TFilter(and_=None, existence=None, range=None, recency=None, or_=None, named='GLOBAL', overlap=None)
+    request.groups['pw_bid_fam'] = req.RecGroupRequest(count=2, metafilter=filter)
+
+    config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
+    with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
+        response = client.get_recommendations(request)
+    assert len(response) == 18
