@@ -4,7 +4,7 @@ import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
 # HOST = 'localhost'
-HOST = 'realtime-recs-b.magic.boomtrain.com'
+HOST = 'realtime-recs-a.magic.boomtrain.com'
 #HOST = 'rts.aws.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
@@ -25,6 +25,39 @@ testdata = [
     ('Rappler', '1a1e951c0be6ac5f7a57c617f1160972'),
     ('Kellogg Insight', '2a9897b9f56088c2916bb3403cfff631')
 ]
+
+
+
+def test_metafilter_rappler():
+    site_id = '1a1e951c0be6ac5f7a57c617f1160972'
+
+    request = req.RecsRequest(site_id=site_id,
+                              bsin=BSIN,
+                              seeds=['article|156222'],
+                              excludes=['article|156222'],
+                              recset_id='7aa96f3a-c7a5-11e6-b95c-0e62f196a588',
+                              test=False)
+
+    metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
+        recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
+        recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['Nigeria', 'Gombe'], field='keywords', amount=recs_filter.TRange(min_=1.0, max_=None),
+                                       match_type=0), recency=None, and_=None, existence=None, or_=None, named=None,
+                range=None)], existence=None, or_=None, named=None, range=None)
+
+    request.groups[GROUP_NAME] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
+    config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
+    with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
+        response = client.get_recommendations(request)
+    assert len(response) == COUNT
+    for r in response:
+        print(r)
+
+
+
+
+
+
+
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
 def test_no_filter(customer_name, site_id):
