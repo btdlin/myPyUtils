@@ -1,9 +1,13 @@
 import requests, json, pytest
 
-HOST = 'recommendations-g.magic.boomtrain.com'
+HOST = 'recommendations-e.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
+    ('YP Canada EN', '593964c3c0f76bc59c65b324f9dbf869'),
+    ('Atlanta Black Star', 'atlanta-black-star'),
+    ('Hubspot', 'hubspot-blog'),
+    ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69'),
     ('WireFly', '92d7386bbdaae2999f701aa2a614eaeb'),
     ('IEEE', 'fc09a30ba1a4b43d0cc9990be2df89bb'),
     ('Vogue', '9b69d8fc8b441b43d493d713e5703ada'),
