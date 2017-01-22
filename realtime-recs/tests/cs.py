@@ -83,7 +83,8 @@ testdata_metafilter_resource_type_article = [
 ]
 @pytest.mark.parametrize("customer_name, site_id", testdata_metafilter_resource_type_article)
 def test_metafilter_resource_type_article(customer_name, site_id):
-    filter = f.overlap_filter(field='resource-type', values=['article'], min=1)
+    filter = f.overlap_filter(field='resource-type', values=['文章'], min=1)
+    #filter = f.overlap_filter(field='resource-type', values=['article'], min=1)
     candidates = CLIENT.get_candidates(site_id, filter=f.and_filter(f.named_filter('GLOBAL'), filter), limit=100, sort_by=SortStrategy.POP_1D)
     assert len(candidates) > 0
 

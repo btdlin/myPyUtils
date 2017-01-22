@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df = pd.read_csv('file:///Users/dlin/Projects/test/iris.data', header=None)
+df = pd.read_csv('file:///Users/dlin/work/Projects/myPyUtils/iris.data', header=None)
 
 #df = pd.read_csv('https://archive.ics.uci.edu/ml/'
 #        'machine-learning-databases/iris/iris.data', header=None)

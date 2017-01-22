@@ -1,7 +1,7 @@
 import requests, json, pytest
 
-HOST = 'recommendations-e.magic.boomtrain.com'
-# HOST = 'recommendations.api.boomtrain.com'
+HOST = 'recommendations-a.magic.boomtrain.com'
+#HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
     ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69')

@@ -3,9 +3,9 @@ import recs_client.request as req
 import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
-# HOST = 'localhost'
-HOST = 'realtime-recs-b.magic.boomtrain.com'
-#HOST = 'rts.aws.boomtrain.com'
+#HOST = 'realtime-recs-e.magic.boomtrain.com'
+HOST = 'localhost'
+#HOST = 'realtime-recs-b.magic.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
 BSIN = 'f6cb11da-3342-4849-a098-2efe94f8e80e'
@@ -33,6 +33,7 @@ def test_metafilter_resource_type_article(customer_name, site_id):
 
     metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
         recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
+        #recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['文章'], field='resource-type', amount=recs_filter.TRange(min_=1.0, max_=None),
         recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['article'], field='resource-type', amount=recs_filter.TRange(min_=1.0, max_=None),
                                        match_type=0), recency=None, and_=None, existence=None, or_=None, named=None,
                 range=None)], existence=None, or_=None, named=None, range=None)

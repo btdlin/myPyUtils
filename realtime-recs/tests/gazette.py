@@ -1,45 +1,27 @@
-import pytest
-import recs_client.request as req
-import bt_rts.thrift.gen.filters as recs_filter
-from recs_client.client import RecommendationsClient
+from bt_candidates.client import Client
+from bt_candidates.wiring import default_schema_factory as sf
+from bt_candidates.wiring import default_filter_factory as ff
+from bt_candidates.common import FieldType, AmountType, MatchType
+from bt_candidates.resource_schema import SchemaField, ResourceSchema, DataFormat, DataLoader
+from datetime import timedelta
+from bt_candidates.sorting import SortStrategy
 
-# HOST = 'localhost'
-HOST = 'realtime-recs-b.magic.boomtrain.com'
-#HOST = 'rts.aws.boomtrain.com'
-PORT = 7070
-TIMEOUT = 20000
-BSIN = 'f6cb11da-3342-4849-a098-2efe94f8e80e'
-RECSET_ID = 'fakedb0c-c5c6-4515-9bd1-5a06ddd676f6'
-EMPTY_SEEDS =[]
-EMPTY_EXCLUDES =[]
-TEST = True
-GROUP_NAME = 'default'
-COUNT = 4
-CALLING_APP = 'test_client'
+client = Client(host='candidates.aws.boomtrain.com', port=7070)
 
-testdata = [
-    ('Atlanta Black Star', 'atlanta-black-star')
-]
+site_id = "e9cd7a8ae2406275f6afb01b679ebf69"
+schema = client.get_schema(site_id)
 
-@pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_metafilter_resource_type_article(customer_name, site_id):
 
-    request = req.RecsRequest(site_id=site_id,
-                              bsin=BSIN,
-                              seeds=EMPTY_SEEDS,
-                              excludes=EMPTY_EXCLUDES,
-                              recset_id=RECSET_ID,
-                              test=TEST)
+def test_gazette():
+    filter_resource_type = ff.overlap_filter(field='resource-type', values={'thegazette_sports'}, min=1, match_type=MatchType.CONTAINS)
+    filter_meta_global = ff.and_filter(filter_resource_type, schema.named_filters['GLOBAL'])
 
-    metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
-        recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
-        recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['thegazette_default'], field='resource-type', amount=recs_filter.TRange(min_=1.0, max_=None), match_type=0), recency=None, and_=None, existence=None, or_=None, named=None, range=None),
-        recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['thegazette_sports'], field='resource-type', amount=recs_filter.TRange(min_=1.0, max_=None), match_type=0), recency=None, and_=None, existence=None, or_=None, named=None, range=None)
-        ], existence=None, or_=None, named=None, range=None)
+    candidates = client.get_candidates(site_id=site_id, filter=filter_meta_global, limit=100, sort_by=SortStrategy.POP_1D)
 
-    request.groups[GROUP_NAME] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
-    config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
-    with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
-        response = client.get_recommendations(request)
-    assert len(response) == COUNT
+    assert len(candidates) == 100
 
+    resource_ids = [candidate.resource_id for candidate in candidates]
+    resources = client.get_resources(site_id=site_id, ids=resource_ids).resources
+    resource_types = [resource.to_jsonobj()['fields']['resource-type'] for resource in resources]
+    for resource_type in resource_types:
+        assert 'thegazette_sports' in resource_type

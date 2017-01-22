@@ -3,14 +3,20 @@ import recs_client.request as req
 import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
-HOST = 'realtime-recs-b.magic.boomtrain.com'
+#HOST = 'realtime-recs-b.magic.boomtrain.com'
 #HOST = 'rts.aws.boomtrain.com'
+HOST = 'localhost'
 PORT = 7070
 TIMEOUT = 20000
 BSIN = '24675829-e147-4f83-ae97-f69e2c38dd28'
 RECSET_ID = 'fakedb0c-c5c6-4515-9bd1-5a06ddd676f6'
 EMPTY_SEEDS =[]
-EMPTY_EXCLUDES =['website|a4564eeeac1a79fa5539044fb98f4185', 'thegazette_default|d73d63b3e436abc37a658e5837352f02']
+EMPTY_EXCLUDES =['thegazette_default|7c491eccfe7846ab027a1edb667aae3a',
+                 'thegazette_default|f6e5643c047044bba83e181c3832e4fa',
+                 'thegazette_default|1cac764d7228097f49614d07ebb054f8',
+                 'thegazette_default|f72849dc88231f4428c48fdeeb37951d',
+                 'thegazette_default|ab50508da2cdca277caeda98995a0e42',
+                 'thegazette_default|f9bbabd2e068318ef394d53fdeafc075']
 TEST = True
 GROUP_NAME = 'default'
 COUNT = 4
@@ -30,13 +36,13 @@ def test_group_metafilter(customer_name, site_id):
                               recset_id=RECSET_ID,
                               test=TEST)
 
-    metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
-        recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
-        recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['thegazette_default'], field='resource-type', amount=recs_filter.TRange(min_=1.0, max_=None),
-                                                               match_type=0), recency=None, and_=None, existence=None, or_=None, named=None, range=None)
-    ], existence=None, or_=None, named=None, range=None)
-
-    request.groups['thegazette_default'] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
+#    metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
+#        recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
+#        recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['thegazette_default'], field='resource-type', amount=recs_filter.TRange(min_=1.0, max_=None),
+#                                                               match_type=0), recency=None, and_=None, existence=None, or_=None, named=None, range=None)
+#    ], existence=None, or_=None, named=None, range=None)
+#
+#    request.groups['thegazette_default'] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
 
     metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
         recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
@@ -49,4 +55,4 @@ def test_group_metafilter(customer_name, site_id):
     config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
     with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
         response = client.get_recommendations(request)
-    assert len(response) == 8
+    assert len(response) == 4
