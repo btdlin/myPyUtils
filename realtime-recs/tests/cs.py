@@ -4,10 +4,28 @@ from bt_candidates.sorting import SortStrategy
 from bt_candidates.common import FieldType, AmountType, MatchType
 import pytest
 import time
+from datetime import timedelta
 
 CLIENT = Client(host='candidates.aws.boomtrain.com', port=7070)
 
 testdata = [
+    ('upout', '7a0f18a6274829b2e0710f57eea2b6d0'),
+    ('enduro', '73007f3ae1ca2c1c94a3f99644769d6a'),
+    ('heat-street', 'heat-street'),
+    ('roll-call', 'roll-call'),
+    ('abril-vip', 'abril-vip'),
+    ('wnyt-hubbard-tv', 'wnyt-hubbard-tv'),
+    ('cyber-creations', 'cyber-creations'),
+    ('Trekaroo', '444d810c69d042082b674f027d106afc'),
+    ('Diginomica', '3c499a166380645f83154eb95983ed96'),
+    ('Chow', '682'),
+    ('Gamespot', '0eddb34d4eb4be1df2b4160ec047aa73'),
+    ('winnipeg free press', 'ae6897195848feb20f96c5beac08e41b'),
+    ('techworld', 'techworld'),
+    ('wide open country', 'wide-open-country'),
+    ('snopes', 'snopes'),
+    ('jmg-lp', 'jmg-lp'),
+    ('wddty', 'ca946f2ad810df63aaeec9a4c29f7cb8'),
     ('Atlanta Black Star', 'atlanta-black-star'),
     ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69'),
     ('WireFly', '92d7386bbdaae2999f701aa2a614eaeb'),
@@ -17,8 +35,19 @@ testdata = [
     ('Rappler', '1a1e951c0be6ac5f7a57c617f1160972'),
     ('Kellogg Insight', '2a9897b9f56088c2916bb3403cfff631'),
     ('YP Canada EN', '593964c3c0f76bc59c65b324f9dbf869'),
+    ('Forbes', '53a9d86b81ee7fe4451218e0f95e2136'),
     ('Hubspot', 'hubspot-blog')
 ]
+
+def test_wideopencountry_pubdate_after():
+    site_id = 'wide-open-country'
+    filter = f.recency_filter(
+                        field = 'pubDate',
+                        min = timedelta(days=-4),
+                        )
+    candidates = CLIENT.get_candidates(site_id, filter=f.and_filter(f.named_filter('GLOBAL'), filter), limit=100, sort_by=SortStrategy.POP_1D)
+    assert len(candidates) > 25
+
 
 # YP_CA_EN perf testing
 @pytest.mark.skip(reason="Not sure if this works for all customers")
@@ -71,7 +100,20 @@ def test_global_filter(customer_name, site_id):
 #     assert len(candidates) == 100
 
 testdata_metafilter_resource_type_article = [
-    # ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69'),
+    ('heat-street', 'heat-street'),
+    ('roll-call', 'roll-call'),
+    ('abril-vip', 'abril-vip'),
+    ('wnyt-hubbard-tv', 'wnyt-hubbard-tv'),
+    ('cyber-creations', 'cyber-creations'),
+    ('Trekaroo', '444d810c69d042082b674f027d106afc'),
+    ('Trekaroo', '444d810c69d042082b674f027d106afc'),
+    ('Gamespot', '0eddb34d4eb4be1df2b4160ec047aa73'),
+    ('winnipeg free press', 'ae6897195848feb20f96c5beac08e41b'),
+    ('techworld', 'techworld'),
+    ('wide open country', 'wide-open-country'),
+    ('snopes', 'snopes'),
+    ('wddty', 'ca946f2ad810df63aaeec9a4c29f7cb8'),
+    ('jmg-lp', 'jmg-lp'),
     ('Hubspot', 'hubspot-blog'),
     ('Atlanta Black Star', 'atlanta-black-star'),
     ('WireFly', '92d7386bbdaae2999f701aa2a614eaeb'),
@@ -83,13 +125,13 @@ testdata_metafilter_resource_type_article = [
 ]
 @pytest.mark.parametrize("customer_name, site_id", testdata_metafilter_resource_type_article)
 def test_metafilter_resource_type_article(customer_name, site_id):
-    filter = f.overlap_filter(field='resource-type', values=['文章'], min=1)
-    #filter = f.overlap_filter(field='resource-type', values=['article'], min=1)
+    #filter = f.overlap_filter(field='resource-type', values=['文章'], min=1)
+    filter = f.overlap_filter(field='resource-type', values=['article'], min=1)
     candidates = CLIENT.get_candidates(site_id, filter=f.and_filter(f.named_filter('GLOBAL'), filter), limit=100, sort_by=SortStrategy.POP_1D)
     assert len(candidates) > 0
 
 testdata_metafilter_resource_type_news = [
-    # ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69'),
+    ('wddty', 'ca946f2ad810df63aaeec9a4c29f7cb8'),
     ('WireFly', '92d7386bbdaae2999f701aa2a614eaeb'),
     ('IEEE', 'fc09a30ba1a4b43d0cc9990be2df89bb'),
     ('Kellogg Insight', '2a9897b9f56088c2916bb3403cfff631')
@@ -101,7 +143,11 @@ def test_metafilter_resource_type_news(customer_name, site_id):
     assert len(candidates) > 0
 
 testdata_metafilter_module = [
-#    ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69'),
+    ('winnipeg free press', 'ae6897195848feb20f96c5beac08e41b'),
+    ('techworld', 'techworld'),
+    ('wide open country', 'wide-open-country'),
+    ('wddty', 'ca946f2ad810df63aaeec9a4c29f7cb8'),
+    ('jmg-lp', 'jmg-lp'),
     ('Hubspot', 'hubspot-blog'),
     ('Atlanta Black Star', 'atlanta-black-star'),
     ('WireFly', '92d7386bbdaae2999f701aa2a614eaeb'),
@@ -118,7 +164,7 @@ def test_metafilter_module(customer_name, site_id):
     candidates = CLIENT.get_candidates(site_id, filter=f.and_filter(f.named_filter('GLOBAL'), filter), limit=100, sort_by=SortStrategy.POP_1D)
     assert len(candidates) > 0
 
-@pytest.mark.parametrize("customer_name, site_id", testdata)
+@pytest.mark.parametrize("customer_name, site_id", testdata_metafilter_module)
 def test_metafilter_module_not(customer_name, site_id):
     filter = f.overlap_filter(field='module', values=['Sponsored'], min=0, max=0)
     candidates = CLIENT.get_candidates(site_id, filter=f.and_filter(f.named_filter('GLOBAL'), filter), limit=100, sort_by=SortStrategy.POP_1D)

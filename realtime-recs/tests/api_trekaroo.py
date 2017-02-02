@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('Hubspot', 'hubspot-blog')
+    ('Trekaroo', '444d810c69d042082b674f027d106afc')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -13,25 +13,32 @@ HEADERS = {'Content-Type': 'application/json',
            'Postman-Token': '96779af4-01ad-02ef-f010-f47f9a8f3665'}
 
 USERS = {
-        'leslietest12323@boomtrain.com'
+        'jlieberman@forbes.com'
     }
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["article|5755d794736ddfd0ea84b573ff87a126", "article|784892f3e282219c7da9317159c60432", "article|26286fcc0f023a6d826746ee01b7940f", "website|b78e0e8b2ec31594fae91ab18b400aa0", "website|c446fe4e23289a2dfe7b79aa237697f3"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "Daily%3A%20News%20%26%20Sports",
-        "batch": "6532223ff8bc68b956f085fd77c886ae_1484006400",
+        "campaign": "IP%20Warm%20Up%205%20-%20Anytime",
+        "batch": "5a821a981a2f1dec110c0604c2bbc8e6_1485648000",
         "sections": [{
-            "name": "default",
-            "count": 4,
-            "filters": [{
-                "name": "keywords",
-                "values": ["Marketing"]
-            }]
+                "name": "article",
+                "count": 4,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
+        }, {
+                "name": "guide",
+                "count": 1,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["guide"]
+                }]
         }]
     }
 

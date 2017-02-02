@@ -3,12 +3,13 @@ import recs_client.request as req
 import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
-#HOST = 'realtime-recs-b.magic.boomtrain.com'
+HOST = 'realtime-recs-c.magic.boomtrain.com'
 #HOST = 'rts.aws.boomtrain.com'
-HOST = 'localhost'
+#HOST = 'localhost'
 PORT = 7070
 TIMEOUT = 20000
-BSIN = '24675829-e147-4f83-ae97-f69e2c38dd28'
+#BSIN = '24675829-e147-4f83-ae97-f69e2c38dd28'
+BSIN = 'f7cd7674-2922-45e0-950e-3a7ce2c44d60'
 RECSET_ID = 'fakedb0c-c5c6-4515-9bd1-5a06ddd676f6'
 EMPTY_SEEDS =[]
 EMPTY_EXCLUDES =['thegazette_default|7c491eccfe7846ab027a1edb667aae3a',
@@ -55,4 +56,4 @@ def test_group_metafilter(customer_name, site_id):
     config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
     with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
         response = client.get_recommendations(request)
-    assert len(response) == 4
+    assert len(response) == COUNT 

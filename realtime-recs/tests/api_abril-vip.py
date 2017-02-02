@@ -1,10 +1,10 @@
 import requests, json, pytest
 
 HOST = 'recommendations-g.magic.boomtrain.com'
-#HOST = 'recommendations.api.boomtrain.com'
+# HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69')
+    ('abril-vip', 'abril-vip')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -13,32 +13,25 @@ HEADERS = {'Content-Type': 'application/json',
            'Postman-Token': '96779af4-01ad-02ef-f010-f47f9a8f3665'}
 
 USERS = {
-        'rdfulle@gmail.com'
+        'jlieberman@forbes.com'
     }
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": ["thegazette_default|d73d63b3e436abc37a658e5837352f02", "website|a4564eeeac1a79fa5539044fb98f4185"],
+        "exclude": ["website|f0672524065736c4f0267d14d7e0ceb2", "website|ab91be568ec8a6424ef47e67eed05032"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "Daily%3A%20News%20%26%20Sports",
-        "batch": "6532223ff8bc68b956f085fd77c886ae_1484006400",
+        "campaign": "%5BTeste%5D%20VP%20-%20Semanal%20Autom%C3%A1tico",
+        "batch": "ecf402363e0ba1acda60bfdfedb4a483_1485648000",
         "sections": [{
-            "name": "thegazette_default",
-            "count": 4,
-            "filters": [{
-                "name": "resource-type",
-                "values": ["thegazette_default"]
-            }]
-        }, {
-            "name": "thegazette_sports",
-            "count": 4,
-            "filters": [{
-                "name": "resource-type",
-                "values": ["thegazette_sports"]
-            }]
+                "name": "article",
+                "count": 11,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
         }]
     }
 

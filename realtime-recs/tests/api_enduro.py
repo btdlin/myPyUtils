@@ -1,10 +1,10 @@
 import requests, json, pytest
 
 HOST = 'recommendations-g.magic.boomtrain.com'
-#HOST = 'recommendations.api.boomtrain.com'
+# HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69')
+    ('enduro', '73007f3ae1ca2c1c94a3f99644769d6a')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -13,32 +13,32 @@ HEADERS = {'Content-Type': 'application/json',
            'Postman-Token': '96779af4-01ad-02ef-f010-f47f9a8f3665'}
 
 USERS = {
-        'rdfulle@gmail.com'
+        'jlieberman@forbes.com'
     }
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": ["thegazette_default|d73d63b3e436abc37a658e5837352f02", "website|a4564eeeac1a79fa5539044fb98f4185"],
+        "exclude": ["article_de|119264", "article_de|147017"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "Daily%3A%20News%20%26%20Sports",
-        "batch": "6532223ff8bc68b956f085fd77c886ae_1484006400",
+        "campaign": "ENDURO%20Newsletter%20DE%2C%20user%20with%20names",
+        "batch": "0a06b29a1ab9ac2988173b01c2078c92_1485648000",
         "sections": [{
-            "name": "thegazette_default",
-            "count": 4,
-            "filters": [{
-                "name": "resource-type",
-                "values": ["thegazette_default"]
-            }]
+                "name": "article_de",
+                "count": 6,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article_de"]
+                }]
         }, {
-            "name": "thegazette_sports",
-            "count": 4,
-            "filters": [{
-                "name": "resource-type",
-                "values": ["thegazette_sports"]
-            }]
+                "name": "video_de",
+                "count": 2,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["video_de"]
+                }]
         }]
     }
 

@@ -1,10 +1,9 @@
 import requests, json, pytest
 
 HOST = 'recommendations-g.magic.boomtrain.com'
-#HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('Gazette', 'e9cd7a8ae2406275f6afb01b679ebf69')
+    ('Kellogg', '2a9897b9f56088c2916bb3403cfff631')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -13,32 +12,27 @@ HEADERS = {'Content-Type': 'application/json',
            'Postman-Token': '96779af4-01ad-02ef-f010-f47f9a8f3665'}
 
 USERS = {
-        'rdfulle@gmail.com'
+        'dlin@boomtrain.com'
     }
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": ["thegazette_default|d73d63b3e436abc37a658e5837352f02", "website|a4564eeeac1a79fa5539044fb98f4185"],
+        "exclude": ["website|5d773f65d4b7d0a8e84d0ad60c030dd6", "website|386c3c48c6ed2c35998d39d3d2958938"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "Daily%3A%20News%20%26%20Sports",
-        "batch": "6532223ff8bc68b956f085fd77c886ae_1484006400",
+        "campaign": "MMO%20Daily%20Digest%20-%20Recurring",
+        "batch": "02e0c7dbdeeadfb7a3fd6d2e2013ac6c_1485648000",
         "sections": [{
-            "name": "thegazette_default",
-            "count": 4,
+            "name": "rec_articles",
+            "count": 3,
             "filters": [{
                 "name": "resource-type",
-                "values": ["thegazette_default"]
-            }]
-        }, {
-            "name": "thegazette_sports",
-            "count": 4,
-            "filters": [{
-                "name": "resource-type",
-                "values": ["thegazette_sports"]
-            }]
+                "values": ["game"],
+                "operator": "NOT"
+            }
+            ]
         }]
     }
 
