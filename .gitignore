@@ -1,1 +1,8 @@
 .idea/
+*.pyc
+*.DS_store
+.cache
+.python-version
+*.ignore
+
+*.egg-info

@@ -9,6 +9,8 @@ from datetime import timedelta
 CLIENT = Client(host='candidates.aws.boomtrain.com', port=7070)
 
 testdata = [
+    ('moneymagpie', 'moneymagpie'),
+    ('herb', 'herb'),
     ('upout', '7a0f18a6274829b2e0710f57eea2b6d0'),
     ('enduro', '73007f3ae1ca2c1c94a3f99644769d6a'),
     ('heat-street', 'heat-street'),
@@ -100,6 +102,8 @@ def test_global_filter(customer_name, site_id):
 #     assert len(candidates) == 100
 
 testdata_metafilter_resource_type_article = [
+    ('moneymagpie', 'moneymagpie'),
+    ('herb', 'herb'),
     ('heat-street', 'heat-street'),
     ('roll-call', 'roll-call'),
     ('abril-vip', 'abril-vip'),
