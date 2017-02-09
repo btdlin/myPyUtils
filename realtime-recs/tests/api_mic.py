@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('mic', '75471913db291cdd62f3092709061407')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,18 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["|2708816a3f1a36b0bb793c4e7ab83eab", "trending|167417", "trending|167336", "trending|166814", "trending|167368", "|2708816a3f1a36b0bb793c4e7ab83eab", "trending|167417", "trending|166814", "trending|167165", "trending|167524", "trending|167477", "trending|167425", "trending|166933", "trending|167433"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "miccheck%202%2F2",
+        "batch": "97871b7d10f789fdce1d308938092467_1486080000",
         "sections": [{
-                "name": "article",
-                "count": 6,
-                "filters": []
+                "name": "trending",
+                "count": 1,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["trending"]
+                }]
         }]
     }
 

@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('kob-hubbard-tv', 'kob-hubbard-tv')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -23,12 +23,19 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
         "exclude": [],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "KOB%204%20Morning%20Headlines",
+        "batch": "620f049cf84a1407d3627036f9b5c539_1486080000",
         "sections": [{
-                "name": "article",
+                "name": "kob_articles",
                 "count": 6,
                 "filters": []
+        }, {
+                "name": "kob_articlesNews",
+                "count": 2,
+                "filters": [{
+                        "name": "section",
+                        "values": ["New%20Mexico%20News"]
+                }]
         }]
     }
 

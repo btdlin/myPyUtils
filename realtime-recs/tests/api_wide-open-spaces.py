@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('wide-open-spaces', 'wide-open-spaces')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,18 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["website|c972225e243fb274666555b8af5fb18a", "article|131276", "object|7525e80c230d724d0ab7cc3988505881", "object|7f1b8c48c03c0b2f9b70918b49e6c3bf", "object|4816bf074ca1b073fed9e9b6d464f83c", "object|87d3512f1821418f8920345aa980a25f", "article|37ccf98f56befbe6a97fc78e1aa38c34", "article|b622d75b3f0b6860c10051ee487a14b3"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "Daily-2.3-PIB",
+        "batch": "9d442e3cabbd86e563324bee082d8860_1486080000",
         "sections": [{
-                "name": "article",
-                "count": 6,
-                "filters": []
+                "name": "articles",
+                "count": 15,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["all"]
+                }]
         }]
     }
 

@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('jmg-pan', 'jmg-pan')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -23,12 +23,15 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
         "exclude": [],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "PAN%20Daily%20Newsletter",
+        "batch": "bb9fc6544965f82b7850fe1df5f4c3f4_1486080000",
         "sections": [{
                 "name": "article",
-                "count": 6,
-                "filters": []
+                "count": 10,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
         }]
     }
 

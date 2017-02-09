@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('alistdaily', '883617d0eb6793113323ba5e36470778')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,22 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["website_alist|44224", "website_alist|23013", "website_alist|23012", "website_alist|44224"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "%5Ba%5Dlistdaily%20Newsletter%20-%20All",
+        "batch": "076e57ebbd9878725a81367bd56c89de_1486080000",
         "sections": [{
-                "name": "article",
-                "count": 6,
-                "filters": []
+                "name": "articles",
+                "count": 5,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article_alist"]
+                }, {
+                        "name": "pubDate",
+                        "values": ["-P7D"],
+                        "operator": "AFTER"
+                }]
         }]
     }
 

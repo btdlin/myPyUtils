@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('abril-mundo-estranho', 'abril-mundo-estranho')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,18 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["website|d70fcffcdd983cf0582a91e90c872536", "website|f121b2a56ab2d4caae254bf2126ae557"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "ME%20-%20Semanal%20Autom%C3%A1tico",
+        "batch": "2a2a1247e635f92527b1da35f60363de_1485993600",
         "sections": [{
                 "name": "article",
-                "count": 6,
-                "filters": []
+                "count": 11,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
         }]
     }
 

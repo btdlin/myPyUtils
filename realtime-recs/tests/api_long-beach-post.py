@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('long-beach-post', 'long-beach-post')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,19 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["website|b4c6d99eaab70be4d88550facb324cf8"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "eALERT%20%28Thursday%2002.02.17%29",
+        "batch": "3d7e4d8898c2065c027673f5d4403617_1486080000",
         "sections": [{
-                "name": "article",
-                "count": 6,
-                "filters": []
+                "name": "lbpost",
+                "count": 10,
+                "filters": [{
+                        "name": "pubDate",
+                        "values": ["-P1D"],
+                        "operator": "AFTER"
+                }]
         }]
     }
 

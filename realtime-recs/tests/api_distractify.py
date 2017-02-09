@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('distractify', 'e22d241e217d40fe9451573dd9bd319f')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,18 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["website|20f008c7262c747707128d7d4170aeef", "website|20f008c7262c747707128d7d4170aeef"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "Distractify%20Daily%20Newsletter-%20Working%2010-Story%20Template-9.19.2016",
+        "batch": "4b33dce607992f7bf9d2c6153b79de0c_1485993600",
         "sections": [{
                 "name": "article",
-                "count": 6,
-                "filters": []
+                "count": 11,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
         }]
     }
 

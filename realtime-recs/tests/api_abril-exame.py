@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('abril-exame', '4e95f0debe3619d4e92b1b9828f17942')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,18 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["article|d9a99531c4cdf058b7a3bec3a7421c9a", "website|7779c9c94fb0fa19618502b158443286", "article|2322751", "website|cab5644bb725eedca2493b4fd7f2ce88", "website|f247398bb986fc72ccd5fc3471ca2b1b"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "EXAME%20DI%C3%81RIA%20%28AUTOM%C3%81TICO%29",
+        "batch": "b326e3c57eb00a0557de93d704a3da33_1485648000",
         "sections": [{
                 "name": "article",
-                "count": 6,
-                "filters": []
+                "count": 11,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
         }]
     }
 

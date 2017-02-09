@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('food-news-media', 'b402ff2a76968f1e8867f52a876690b6')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -28,7 +28,11 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
         "sections": [{
                 "name": "article",
                 "count": 6,
-                "filters": []
+                "filters": [{
+                        "name": "model",
+                        "values": ["game"],
+                        "operator": "NOT"
+                }]
         }]
     }
 

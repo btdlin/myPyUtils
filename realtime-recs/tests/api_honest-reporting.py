@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('honest-reporting', 'honest-reporting')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -23,11 +23,19 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
         "exclude": [],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "Test",
+        "batch": "6a691dbcb09c40245d5b7f2c11f32c0f_1485993600",
         "sections": [{
-                "name": "article",
-                "count": 6,
+                "name": "hr_recent",
+                "count": 1,
+                "filters": [{
+                        "name": "pubDate",
+                        "values": ["-P2D"],
+                        "operator": "AFTER"
+                }]
+        }, {
+                "name": "hr_all",
+                "count": 5,
                 "filters": []
         }]
     }

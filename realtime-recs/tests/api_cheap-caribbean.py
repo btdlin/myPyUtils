@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('cheap-caribbean', '565a3d0d5b838bc0005f81a706afdec2')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -23,12 +23,15 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
         "exclude": [],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "Dynamic%20Test",
+        "batch": "927a73d27ece004c0611e07a1be882fb_1486166400",
         "sections": [{
-                "name": "article",
-                "count": 6,
-                "filters": []
+                "name": "hotel",
+                "count": 5,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["hotel"]
+                }]
         }]
     }
 

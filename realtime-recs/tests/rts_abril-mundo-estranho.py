@@ -13,20 +13,23 @@ EMPTY_SEEDS =[]
 EMPTY_EXCLUDES =[]
 TEST = True
 GROUP_NAME = 'default'
+COUNT = 2
 CALLING_APP = 'test_client'
 
 def test_metafilter_resource_type_article_abs():
     COUNT = 4
-    request = req.RecsRequest(site_id='roll-call',
-                              bsin='de2fb381-767f-4b73-a519-eb66013dbfbe',
+    request = req.RecsRequest(site_id='abril-mundo-estranho',
+                              bsin='b1bd2d39-71d6-4d66-9c39-72c766146686',
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,
                               recset_id=RECSET_ID,
                               test=TEST)
 
     metafilter = recs_filter.TFilter(overlap=None, recency=None, and_=[
-        recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None)
-                ], existence=None, or_=None, named=None, range=None)
+        recs_filter.TFilter(overlap=None, recency=None, and_=None, existence=None, or_=None, named='GLOBAL', range=None),
+        recs_filter.TFilter(overlap=recs_filter.TOverlapFilter(values=['article'], field='resource-type', amount=recs_filter.TRange(min_=1.0, max_=None),
+                                       match_type=0), recency=None, and_=None, existence=None, or_=None, named=None,
+                range=None)], existence=None, or_=None, named=None, range=None)
 
     request.groups[GROUP_NAME] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
     config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}

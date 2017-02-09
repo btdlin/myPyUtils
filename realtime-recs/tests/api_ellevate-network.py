@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('ellevate-network', '68a7f0c35a48725efb301ae3dc791c2e')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -23,12 +23,22 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
         "exclude": [],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "The%20Morning%20Boost%20-%20LIVE",
+        "batch": "d501cc7e51dae9d89028715ff30c9ac2_1486080000",
         "sections": [{
-                "name": "article",
-                "count": 6,
-                "filters": []
+                "name": "articles",
+                "count": 2,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
+        }, {
+                "name": "jam_sessions",
+                "count": 2,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["jam_session"]
+                }]
         }]
     }
 

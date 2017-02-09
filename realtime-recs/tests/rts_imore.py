@@ -13,14 +13,13 @@ EMPTY_SEEDS = []
 EMPTY_EXCLUDES = []
 TEST = True
 GROUP_NAME = 'default'
-
 CALLING_APP = 'test_client'
 
 
 def test_metafilter_resource_type_article_abs():
-    COUNT = 10
-    request = req.RecsRequest(site_id='0eddb34d4eb4be1df2b4160ec047aa73',
-                              bsin='4c3adc65-0e68-4a1e-9448-ecdce79fe7ee',
+    COUNT = 4
+    request = req.RecsRequest(site_id='eea9006861e426c0e2efb4f432e697d7',
+                              bsin='406dcdee-4197-4b58-ab1b-3cbd6f3b7473',
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,
                               recset_id=RECSET_ID,
@@ -30,13 +29,14 @@ def test_metafilter_resource_type_article_abs():
         recs_filter.TFilter(existence=None, and_=None, or_=None, recency=None, overlap=None, any=None, named='GLOBAL',
                             range=None),
         recs_filter.TFilter(existence=None, and_=None, or_=None, recency=None,
-                            overlap=recs_filter.TOverlapFilter(amount=recs_filter.TRange(min_=1.0, max_=None),
-                                                               values=['article'], field='resource-type',
+                            overlap=recs_filter.TOverlapFilter(amount=recs_filter.TRange(min_=None, max_=0.0),
+                                                               values=['game'],
+                                                               field='model',
                                                                match_type=0), any=None, named=None, range=None)],
                                      or_=None, recency=None,
                                      overlap=None, any=None, named=None, range=None)
 
-    request.groups['article'] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
+    request.groups[GROUP_NAME] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
     config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
     with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
         response = client.get_recommendations(request)

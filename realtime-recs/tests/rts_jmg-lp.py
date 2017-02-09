@@ -17,9 +17,9 @@ COUNT = 2
 CALLING_APP = 'test_client'
 
 def test_metafilter_resource_type_article_abs():
-    COUNT = 4
-    request = req.RecsRequest(site_id='jmg-lp',
-                              bsin='41b6b4c5-ad33-4c7b-87f2-1fb2fff1736a',
+    COUNT = 10
+    request = req.RecsRequest(site_id='jmg-pan',
+                              bsin='38f4fca6-11a2-4d67-8a83-e6fee9b75ecf',
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,
                               recset_id=RECSET_ID,

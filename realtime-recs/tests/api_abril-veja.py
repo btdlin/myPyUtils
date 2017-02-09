@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('abril-veja', 'f941f7fb036fb2836f08d8fff561b60d')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -20,15 +20,18 @@ USERS = {
 def test_with_filter_with_exclude_group(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["website|e52fa2c5958c48b8bc232c4c189f48c0", "website|1a559720fc9f6e4e584a4f952897b4a1"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "%5BTeste%20Pr%C3%A9-Lan%C3%A7amento%5D%20Veja.com%20-%20As%2010%20boas%20do%20dia",
+        "batch": "6a056caf16166f76a9683c83560c938e_1485993600",
         "sections": [{
                 "name": "article",
-                "count": 6,
-                "filters": []
+                "count": 11,
+                "filters": [{
+                        "name": "resource-type",
+                        "values": ["article"]
+                }]
         }]
     }
 

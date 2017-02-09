@@ -4,7 +4,7 @@ HOST = 'recommendations-g.magic.boomtrain.com'
 # HOST = 'recommendations.api.boomtrain.com'
 
 testdata = [
-    ('roll-call', 'roll-call')
+    ('purple-wave', '5d47f4b6ee66a0023993c549ab6221ce')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -23,12 +23,15 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
         "exclude": [],
         "caller": "bme",
         "medium": "email",
-        "campaign": "RNPL%20with%20valid%20payment%20Advanced%20Template",
-        "batch": "1c3eabf043e93809a11ef5b719a4f72f_1485648000",
+        "campaign": "170130",
+        "batch": "6d25057a7f23274c5f80b01c6bd082b7_1485993600",
         "sections": [{
-                "name": "article",
-                "count": 6,
-                "filters": []
+                "name": "pw_nofilter",
+                "count": 12,
+                "filters": [{
+                        "name": "closed",
+                        "values": ["0"]
+                }]
         }]
     }
 
