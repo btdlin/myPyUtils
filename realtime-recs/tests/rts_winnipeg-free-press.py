@@ -3,8 +3,8 @@ import recs_client.request as req
 import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
-HOST = 'localhost'
-#HOST = 'realtime-recs-k.magic.boomtrain.com'
+#HOST = 'localhost'
+HOST = 'realtime-recs-k.magic.boomtrain.com'
 #HOST = 'rts.aws.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
@@ -19,7 +19,7 @@ CALLING_APP = 'test_client'
 def test_metafilter_resource_type_article_abs():
     COUNT = 4
     request = req.RecsRequest(site_id='ae6897195848feb20f96c5beac08e41b',
-                              bsin='b82f363d-2ade-42d3-9013-73c4197dc5bf',
+                              bsin='265ded23-b7ed-480d-b283-9ae941d33ab4',
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,
                               recset_id=RECSET_ID,

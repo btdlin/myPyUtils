@@ -9,6 +9,7 @@ from datetime import timedelta
 CLIENT = Client(host='candidates.aws.boomtrain.com', port=7070)
 
 testdata = [
+    ('ellevate-network', '68a7f0c35a48725efb301ae3dc791c2e'),
     ('abril-quatro-rodas', 'abril-quatro-rodas'),
     ('sonoma-media-investments', 'sonoma-media-investments'),
     ('home-exchange', '12813b8b61d75410d6b804eb6ab73f4d'),
@@ -72,7 +73,7 @@ testdata = [
     ('roll-call', 'roll-call'),
     ('abril-vip', 'abril-vip'),
     ('wnyt-hubbard-tv', 'wnyt-hubbard-tv'),
-    ('cyber-creations', 'cyber-creations'),
+#    ('cyber-creations', 'cyber-creations'),
     ('Trekaroo', '444d810c69d042082b674f027d106afc'),
     ('Diginomica', '3c499a166380645f83154eb95983ed96'),
     ('Chow', '682'),
@@ -176,6 +177,7 @@ def test_global_filter(customer_name, site_id):
 #     assert len(candidates) == 100
 
 testdata_metafilter_resource_type_article = [
+    ('ellevate-network', '68a7f0c35a48725efb301ae3dc791c2e'),
     ('abril-quatro-rodas', 'abril-quatro-rodas'),
     ('seattles-child', '64c06b289b11f0f1d36bf7f896abdf8b'),
     ('abril-saude', 'abril-saude'),
@@ -220,7 +222,7 @@ testdata_metafilter_resource_type_article = [
     ('roll-call', 'roll-call'),
     ('abril-vip', 'abril-vip'),
     ('wnyt-hubbard-tv', 'wnyt-hubbard-tv'),
-    ('cyber-creations', 'cyber-creations'),
+#    ('cyber-creations', 'cyber-creations'),
     ('Trekaroo', '444d810c69d042082b674f027d106afc'),
     ('Trekaroo', '444d810c69d042082b674f027d106afc'),
     ('Gamespot', '0eddb34d4eb4be1df2b4160ec047aa73'),
