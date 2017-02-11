@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 11
     request = req.RecsRequest(site_id='abril-mdemulher',
                               bsin='20d29a65-858f-4d02-90a3-0fb91c6f730a',

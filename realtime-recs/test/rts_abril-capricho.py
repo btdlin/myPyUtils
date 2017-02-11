@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='abril-capricho',
                               bsin='418b83e4-6de3-4c7e-acbb-780d981423bf',

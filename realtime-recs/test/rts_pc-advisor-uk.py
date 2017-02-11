@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='pc-advisor-uk',
                               bsin='ecd43e89-7156-4656-9fad-ff2ad5593bb5',

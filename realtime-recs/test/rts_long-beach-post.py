@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     request = req.RecsRequest(site_id='long-beach-post',
                               bsin='e1fb9080-f54f-47cd-923a-ae6d6d9342a0',
                               seeds=EMPTY_SEEDS,

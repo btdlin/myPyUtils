@@ -21,10 +21,9 @@ testdata = [
     ('Leibish', '8bf9fa832a2cf351cf1a19098038459d')
 ]
 
-@pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_group_metafilter(customer_name, site_id):
+def test_rts():
 
-    request = req.RecsRequest(site_id=site_id,
+    request = req.RecsRequest(site_id='8bf9fa832a2cf351cf1a19098038459d',
                               bsin=BSIN,
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,

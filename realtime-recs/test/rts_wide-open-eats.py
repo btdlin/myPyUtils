@@ -21,7 +21,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     request = req.RecsRequest(site_id='wide-open-eats',
                               bsin='e29221c2-e1e5-4a8e-a28d-6a2f267552c6',
                               seeds=EMPTY_SEEDS,

@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 COUNT = 2
 CALLING_APP = 'test_client'
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='abril-vip',
                               bsin='a17f00dd-32d7-40f4-8b5d-4522de4202b7',

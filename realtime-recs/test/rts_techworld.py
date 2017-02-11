@@ -15,7 +15,7 @@ TEST = True
 GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='techworld',
                               bsin='e7d64894-65ec-4f1a-992b-82b63051c0b0',

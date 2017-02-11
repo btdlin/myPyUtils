@@ -15,7 +15,7 @@ TEST = True
 GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='american-association-of-orthodon',
                               bsin='325038d5-b336-488c-9299-31f6f223e7a8',

@@ -17,7 +17,7 @@ COUNT = 2
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 10
     request = req.RecsRequest(site_id='jmg-lp',
                               bsin='481d484c-07d7-41d6-889f-85b6a14de5b0',

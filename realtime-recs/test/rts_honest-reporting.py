@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT1 = 5
     COUNT2 = 1
     request = req.RecsRequest(site_id='honest-reporting',

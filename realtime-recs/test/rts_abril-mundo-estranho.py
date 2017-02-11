@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 COUNT = 2
 CALLING_APP = 'test_client'
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='abril-mundo-estranho',
                               bsin='b1bd2d39-71d6-4d66-9c39-72c766146686',

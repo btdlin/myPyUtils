@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='computerworld-uk',
                               bsin='7e797bc8-47a8-4d98-b657-f8c26c6c6bdc',

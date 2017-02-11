@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 7
     request = req.RecsRequest(site_id='sonoma-media-investments',
                               bsin='4f7bec79-45d9-48b0-8f9e-16fc9686bccc',

@@ -22,10 +22,9 @@ testdata = [
     ('wide-open-pets', 'wide-open-pets')
 ]
 
-@pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_group_metafilter(customer_name, site_id):
+def test_rts():
 
-    request = req.RecsRequest(site_id=site_id,
+    request = req.RecsRequest(site_id='wide-open-pets',
                               bsin=BSIN,
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,

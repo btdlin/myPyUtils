@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 11
     request = req.RecsRequest(site_id='abril-quatro-rodas',
                               bsin='2c90a867-b955-4491-93a8-a962078db306',

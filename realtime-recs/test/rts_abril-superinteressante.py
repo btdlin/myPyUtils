@@ -16,7 +16,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='abril-superinteressante',
                               bsin='c7dba52e-e818-47ad-bc15-6f0f38f4835b',

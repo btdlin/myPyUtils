@@ -22,7 +22,7 @@ testdata = [
 ]
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_group_metafilter(customer_name, site_id):
+def test_rts(customer_name, site_id):
 
     request = req.RecsRequest(site_id=site_id,
                               bsin=BSIN,

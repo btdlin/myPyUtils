@@ -15,7 +15,7 @@ TEST = True
 GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
-def test_metafilter_resource_type_article_abs():
+def test_rts():
     COUNT = 4
     request = req.RecsRequest(site_id='wnyt-hubbard-tv',
                               bsin='825dbd91-c462-47ce-aada-e8cddd6c8a19',

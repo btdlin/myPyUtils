@@ -17,7 +17,7 @@ USERS = {
     }
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_with_filter_with_exclude_group(customer_name, site_id):
+def test_api(customer_name, site_id):
     kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
     payload = {
         "exclude": ["home_page|998c8eea5f4d7325b772a00d63dfae7e", "|2f6dfeaed24dc4db3a9ae80a6efc1d9d", "|f54ff3aa81e108897940e32fa82af533", "|ea6c06dd8e2c8b7ce643709c7584c0d6", "|4b722b38361e853b384aba9cf29c126a", "|d9991f15e6e5a4b83c3ed94d0f2ed057"],
@@ -45,6 +45,6 @@ def test_with_filter_with_exclude_group(customer_name, site_id):
     urls = [kellogg_url + email + '?test=false' for email in USERS]
 
     for url in urls:
-        print(url)
+        #print(url)
         r = requests.post(url, data=json.dumps(payload), headers=HEADERS)
         assert r.status_code == 200
