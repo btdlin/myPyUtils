@@ -19,7 +19,7 @@ CALLING_APP = 'test_client'
 def test_metafilter_resource_type_article_abs():
     COUNT = 3
     request = req.RecsRequest(site_id='herb',
-                              bsin='ed703a1d-f2d5-43f8-971b-4c008007a97e',
+                              bsin='46d9f11f-9e8c-4bd5-be21-739515aebc66',
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,
                               recset_id=RECSET_ID,
