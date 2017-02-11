@@ -4,7 +4,7 @@ import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
 #HOST = 'localhost'
-HOST = 'realtime-recs-h.magic.boomtrain.com'
+HOST = 'realtime-recs-k.magic.boomtrain.com'
 #HOST = 'rts.aws.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
