@@ -18,7 +18,10 @@ USERS = {
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
 def test_api(customer_name, site_id, api_host):
-    kellogg_url = 'http://' + api_host + '/v1/' + site_id + '/email/'
+    if api_host == 'recommendations.api.boomtrain.com':
+        kellogg_url = 'https://' + api_host + '/v1/' + site_id + '/email/'
+    else:
+        kellogg_url = 'http://' + api_host + '/v1/' + site_id + '/email/'
     payload = {
         "exclude": ["website|f85dddf3e1ca270e15fafca82f543513", "website|f85dddf3e1ca270e15fafca82f543513", "object|f4d313850813416f4b1444a53f6b38ba", "object|ac790f3d15859fc9010587b3fb4c9949", "object|6f7029df366501a7b891e302fb340344", "object|83f4fcfaf89d92c8c9e3bdd1eda79f8f", "article|3ac7a94e43f45d6c1edbbbb18fb76200", "article|e5a5fda951cd6d86e88efc9dd555fd77"],
         "caller": "bme",
