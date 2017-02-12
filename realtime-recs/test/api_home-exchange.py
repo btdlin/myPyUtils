@@ -1,7 +1,7 @@
 import requests, json, pytest
 
-HOST = 'recommendations-g.magic.boomtrain.com'
-# HOST = 'recommendations.api.boomtrain.com'
+api_host = 'recommendations-g.magic.boomtrain.com'
+# api_host = 'recommendations.api.boomtrain.com'
 
 testdata = [
     ('home-exchange', '12813b8b61d75410d6b804eb6ab73f4d')
@@ -17,8 +17,8 @@ USERS = {
     }
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_api(customer_name, site_id):
-    kellogg_url = 'http://' + HOST + '/v1/' + site_id + '/email/'
+def test_api(customer_name, site_id, api_host):
+    kellogg_url = 'http://' + api_host + '/v1/' + site_id + '/email/'
     payload = {
         "exclude": [],
         "caller": "bme",

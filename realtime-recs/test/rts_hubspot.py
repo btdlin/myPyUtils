@@ -3,9 +3,9 @@ import recs_client.request as req
 import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
-#HOST = 'localhost'
-HOST = 'realtime-recs-k.magic.boomtrain.com'
-#HOST = 'rts.aws.boomtrain.com'
+#rts_host = 'localhost'
+rts_host = 'realtime-recs-k.magic.boomtrain.com'
+#rts_host = 'rts.aws.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
 BSIN = '35ae7c05-7d85-49f7-abb3-60e35651a397'
@@ -21,10 +21,9 @@ testdata = [
     ('Hubspot', 'hubspot-blog')
 ]
 
-@pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_rts(customer_name, site_id):
+def test_rts(rts_host):
 
-    request = req.RecsRequest(site_id=site_id,
+    request = req.RecsRequest(site_id='hubspot-blog',
                               bsin=BSIN,
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,
@@ -39,7 +38,7 @@ def test_rts(customer_name, site_id):
 
     request.groups['default'] = req.RecGroupRequest(count=COUNT, metafilter=metafilter)
 
-    config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
+    config = {'host': rts_host, 'port': PORT, 'timeout': TIMEOUT}
     with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
         response = client.get_recommendations(request)
     assert len(response) == 4

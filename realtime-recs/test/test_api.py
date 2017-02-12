@@ -1,10 +1,7 @@
 import requests, json, pytest
 
-api_host = 'recommendations-g.magic.boomtrain.com'
-# api_host = 'recommendations.api.boomtrain.com'
-
 testdata = [
-    ('abril-saude', 'abril-saude')
+    ('snopes', 'snopes')
 ]
 
 HEADERS = {'Content-Type': 'application/json',
@@ -17,17 +14,21 @@ USERS = {
     }
 
 @pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_api(customer_name, site_id, api_host):
-    kellogg_url = 'http://' + api_host + '/v1/' + site_id + '/email/'
+def test_with_filter_with_exclude_group(customer_name, site_id, api_host):
+
+    if api_host == 'recommendations.api.boomtrain.com':
+        kellogg_url = 'https://' + api_host + '/v1/' + site_id + '/email/'
+    else:
+        kellogg_url = 'http://' + api_host + '/v1/' + site_id + '/email/'
     payload = {
-        "exclude": [],
+        "exclude": ["website|5546e6d05228e32e558fcaf78964199b", "website|c0dd2a7d1029d637c1d530b8a0a145ee", "website|7b267bf79aba7e6bd7b7dac9a38ff03e", "website|eb99349392137d784db5eff86e48bf85"],
         "caller": "bme",
         "medium": "email",
-        "campaign": "%5BTeste%5D%20SD%20-%20Semanal%20Autom%C3%A1tico",
-        "batch": "94b5b7aade614ee37b8fc5b2f379e522_1486512000",
+        "campaign": "Legacy%20Users%20-%20Wednesday%20%2B%20Saturday",
+        "batch": "3d75826e9215bf476b33cd99fa04687c_1485734400",
         "sections": [{
                 "name": "article",
-                "count": 11,
+                "count": 5,
                 "filters": [{
                         "name": "resource-type",
                         "values": ["article"]
@@ -38,6 +39,6 @@ def test_api(customer_name, site_id, api_host):
     urls = [kellogg_url + email + '?test=false' for email in USERS]
 
     for url in urls:
-        #print(url)
+        print(url)
         r = requests.post(url, data=json.dumps(payload), headers=HEADERS)
         assert r.status_code == 200

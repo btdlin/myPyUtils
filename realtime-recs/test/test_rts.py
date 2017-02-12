@@ -3,23 +3,21 @@ import recs_client.request as req
 import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
-# rts_host = 'localhost'
-rts_host = 'realtime-recs-k.magic.boomtrain.com'
-# rts_host = 'rts.aws.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
 RECSET_ID = 'fakedb0c-c5c6-4515-9bd1-5a06ddd676f6'
 EMPTY_SEEDS = []
-EMPTY_EXCLUDES = ['website|a2d7084c7facc1d6af91e5d06918d733', 'website|b573e9d008d1489f0e4a0b9b86e038e6']
+EMPTY_EXCLUDES = []
 TEST = True
 GROUP_NAME = 'default'
+COUNT = 2
 CALLING_APP = 'test_client'
 
 
 def test_rts(rts_host):
-    COUNT = 11
-    request = req.RecsRequest(site_id='abril-mdemulher',
-                              bsin='20d29a65-858f-4d02-90a3-0fb91c6f730a',
+    COUNT = 4
+    request = req.RecsRequest(site_id='snopes',
+                              bsin='50a46296-8a91-4c7a-bf0b-4f1a15b3ac33',
                               seeds=EMPTY_SEEDS,
                               excludes=EMPTY_EXCLUDES,
                               recset_id=RECSET_ID,

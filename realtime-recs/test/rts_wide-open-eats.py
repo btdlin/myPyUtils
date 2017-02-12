@@ -3,9 +3,9 @@ import recs_client.request as req
 import bt_rts.thrift.gen.filters as recs_filter
 from recs_client.client import RecommendationsClient
 
-# HOST = 'localhost'
-HOST = 'realtime-recs-k.magic.boomtrain.com'
-# HOST = 'rts.aws.boomtrain.com'
+# rts_host = 'localhost'
+rts_host = 'realtime-recs-k.magic.boomtrain.com'
+# rts_host = 'rts.aws.boomtrain.com'
 PORT = 7070
 TIMEOUT = 20000
 RECSET_ID = 'fakedb0c-c5c6-4515-9bd1-5a06ddd676f6'
@@ -21,7 +21,7 @@ GROUP_NAME = 'default'
 CALLING_APP = 'test_client'
 
 
-def test_rts():
+def test_rts(rts_host):
     request = req.RecsRequest(site_id='wide-open-eats',
                               bsin='e29221c2-e1e5-4a8e-a28d-6a2f267552c6',
                               seeds=EMPTY_SEEDS,
@@ -44,7 +44,7 @@ def test_rts():
                                      any=None, named='GLOBAL')
     request.groups['articles'] = req.RecGroupRequest(count=COUNT2, metafilter=metafilter)
 
-    config = {'host': HOST, 'port': PORT, 'timeout': TIMEOUT}
+    config = {'host': rts_host, 'port': PORT, 'timeout': TIMEOUT}
     with RecommendationsClient(calling_app=CALLING_APP, **config) as client:
         response = client.get_recommendations(request)
     assert len(response) == COUNT1 + COUNT2
