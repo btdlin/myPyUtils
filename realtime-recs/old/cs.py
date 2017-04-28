@@ -9,6 +9,13 @@ from datetime import timedelta
 CLIENT = Client(host='candidates.aws.boomtrain.com', port=7070)
 
 testdata = [
+    ('swift-communications', 'swift-communications'),
+    ('jmg-ap', 'jmg-ap'),
+    ('vaping', '45fd85cefef58eb6fdf15ede75b2bafe'),
+    ('food-news-media', 'b402ff2a76968f1e8867f52a876690b6'),
+    ('daily-steals', 'e7718db0ff742a18312271c93d040802'),
+#    ('elite-fixtures', '5b008210310fec564d0cbdfa84bf8861'),
+#    ('jmg-pan', 'jmg-pan'),
     ('ellevate-network', '68a7f0c35a48725efb301ae3dc791c2e'),
     ('abril-quatro-rodas', 'abril-quatro-rodas'),
     ('sonoma-media-investments', 'sonoma-media-investments'),
@@ -96,6 +103,15 @@ testdata = [
     ('Hubspot', 'hubspot-blog')
 ]
 
+def test_long_beach_post_pubdate_after():
+    site_id = 'long-beach-post'
+    filter1 = f.recency_filter(
+                        field = 'pubDate',
+                        min = timedelta(days=-1),
+                        )
+    candidates = CLIENT.get_candidates(site_id, filter=f.and_filter(f.named_filter('GLOBAL'), filter1), limit=100, sort_by=SortStrategy.POP_1D)
+    assert len(candidates) > 0
+
 def test_wide_open_eats_pubdate_after():
     site_id = 'wide-open-eats'
     filter1 = f.recency_filter(
@@ -177,6 +193,12 @@ def test_global_filter(customer_name, site_id):
 #     assert len(candidates) == 100
 
 testdata_metafilter_resource_type_article = [
+    ('swift-communications', 'swift-communications'),
+    ('jmg-ap', 'jmg-ap'),
+    ('vaping', '45fd85cefef58eb6fdf15ede75b2bafe'),
+    ('food-news-media', 'b402ff2a76968f1e8867f52a876690b6'),
+#    ('elite-fixtures', '5b008210310fec564d0cbdfa84bf8861'),
+#    ('jmg-pan', 'jmg-pan'),
     ('ellevate-network', '68a7f0c35a48725efb301ae3dc791c2e'),
     ('abril-quatro-rodas', 'abril-quatro-rodas'),
     ('seattles-child', '64c06b289b11f0f1d36bf7f896abdf8b'),

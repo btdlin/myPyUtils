@@ -8,13 +8,7 @@ from datetime import timedelta
 
 CLIENT = Client(host='candidates.aws.boomtrain.com', port=7070)
 
-testdata = [
-    ('roll-call', 'roll-call')
-]
-
-@pytest.mark.parametrize("customer_name, site_id", testdata)
-def test_global_filter(customer_name, site_id):
-    candidates = CLIENT.get_candidates(site_id, filter=f.named_filter('GLOBAL'), limit=1000, sort_by=SortStrategy.POP_1D)
+def test_global_filter():
+    candidates = CLIENT.get_candidates('abril-elle', filter=f.named_filter('GLOBAL'), limit=1000, sort_by=SortStrategy.POP_1D)
+    #print(candidates)
     assert len(candidates) > 1000000
-    print(len(candidates))
-
