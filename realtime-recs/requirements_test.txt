@@ -34,7 +34,7 @@ pymongo==3.4.0
 python-dateutil==2.6.0
 python-slugify==1.2.1
 pytz==2016.7
-PyYAML==3.12
+PyYAML==5.4
 raven==5.32.0
 requests==2.12.1
 requests-aws4auth==0.9
